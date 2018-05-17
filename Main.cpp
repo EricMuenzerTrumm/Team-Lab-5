@@ -1,6 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#inlcude <iomanip>
+#include <iomanip>
 #include <cstring>
 #include <string>
 #include <fstream>
+using std::cout;
+using std::cin;
+using std::endl;
+using std::fstream;
+using std::ios;
+using std::fixed;
+using std::setprecision;
+using std::setw;
+using std::left;
