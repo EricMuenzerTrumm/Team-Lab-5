@@ -1,8 +1,8 @@
 /***********************************************************************************
 Header:
 ************************************************************************************
-Author: Witheld Online
-Organization: Witheld Online
+Author: Withheld Online
+Organization: Withheld Online
 File Name: Main.cpp
 Date Created: May 18, 2018
 Modifications: 05-22-18 12:00
