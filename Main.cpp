@@ -1,8 +1,8 @@
 /***********************************************************************************
 Header:
 ************************************************************************************
-Author: Withheld Online
-Organization: Withheld Online
+Author: Withheld
+Organization: Withheld
 File Name: Main.cpp
 Date Created: May 18, 2018
 Modifications: 05-22-18 12:00
@@ -37,6 +37,17 @@ using std::fixed;
 using std::setw;
 using std::setprecision;
 
+// Structures
+struct Account
+{
+	char name[32]; //Name
+	char address[48]; //Address
+	char city_state_zip[48]; //City, State, and ZIP
+	char phone_number[16]; //Phone Number
+	float balance; //Balance
+	char last_payment_date[16]; //Last Payment Date
+};
+
 // Prototypes
 void Menu();
 void DisplayFile();
@@ -49,6 +60,7 @@ void DisplayRecord();
 // Main function
 int main()
 {
+	Menu();
 
 	system("pause");
 	return 0;
