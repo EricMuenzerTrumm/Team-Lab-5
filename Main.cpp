@@ -41,12 +41,12 @@ using std::string;
 // Structures
 struct Account
 {
-	char name[32]; //Name
-	char address[48]; //Address
-	char city_state_zip[48]; //City, State, and ZIP
-	char phone_number[16]; //Phone Number
-	float balance; //Balance
-	char last_payment_date[16]; //Last Payment Date
+	char name[32]; // Name
+	char address[48]; // Address
+	char city_state_zip[48]; // City, State, and ZIP
+	char phone_number[16]; // Phone Number
+	float balance; // Balance
+	char last_payment_date[16]; // Last Payment Date
 };
 
 // Prototypes
