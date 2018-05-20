@@ -36,6 +36,7 @@ using std::ios;
 using std::fixed;
 using std::setw;
 using std::setprecision;
+using std::string;
 
 // Structures
 struct Account
@@ -51,7 +52,6 @@ struct Account
 // Prototypes
 void Menu();
 void DisplayFile();
-void RetrieveData();
 void AddRecord();
 void ChangeRecord();
 void DeleteRecord();
