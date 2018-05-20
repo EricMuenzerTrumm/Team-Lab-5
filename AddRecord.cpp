@@ -1,3 +1,4 @@
+// AddRecord function
 void AddRecord()
 {
 	bool replaced = false, valid = true;
@@ -5,7 +6,7 @@ void AddRecord()
 	Account read, write;
 	fstream file;
 
-	file.open("Database.dat", ios::in | ios::out | ios::ate | ios::binary); //Open the file in read and write mode.
+	file.open("Database.dat", ios::in | ios::out | ios::ate | ios::binary); // Open the file in read and write mode.
 
 	cout << "Please enter a Name: ";
 	cin.ignore(cin.rdbuf()->in_avail());
@@ -23,7 +24,7 @@ void AddRecord()
 	cin.ignore(cin.rdbuf()->in_avail());
 	cin.getline(write.phone_number, 16);
 
-	do //While choice is invalid
+	do // While choice is invalid
 	{
 		cout << "Please enter a Balance: ";
 		cin.ignore(cin.rdbuf()->in_avail());
@@ -43,28 +44,28 @@ void AddRecord()
 
 	file.seekg(0L, ios::beg);
 
-	while (file) //While there is still something to read.
+	while (file) // While there is still something to read.
 	{
-		file.read(reinterpret_cast<char *>(&read), sizeof(read)); //Read the current structure in the file and place data into read structure.
+		file.read(reinterpret_cast<char *>(&read), sizeof(read)); // Read the current structure in the file and place data into read structure.
 
-		if (file.tellg() < 0) //If file pointer goes to -1
+		if (file.tellg() < 0) // If file pointer goes to -1
 		{
-			break; //Exit loop to prevent duplicate output.
+			break; // Exit loop to prevent duplicate output.
 		}
 		
-		if (static_cast<string>(read.name) == "null") //If search encounters deleted data.
+		if (static_cast<string>(read.name) == "null") // If search encounters deleted data.
 		{
 			replaced = true;
 			cout << counter * sizeof(write) << endl;
-			file.seekg(counter * sizeof(write), ios::beg); //Go to file position (beggining + counter).
-			file.write(reinterpret_cast<char *>(&write), sizeof(write)); //Overwrite old null data with new data
+			file.seekg(counter * sizeof(write), ios::beg); // Go to file position (beggining + counter).
+			file.write(reinterpret_cast<char *>(&write), sizeof(write)); // Overwrite old null data with new data
 			break;
 		}
 
 		counter++;
 	}
 
-	if (!replaced) //If no null data was replaced, append to end of file.
+	if (!replaced) // If no null data was replaced, append to end of file.
 	{
 		file.clear();
 		file.seekg(0L, ios::end);
