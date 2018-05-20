@@ -4,15 +4,23 @@ void DisplayFile()
 	Account acc;
 	fstream file;
 
-	file.open("Database.dat", ios::in || ios::binary);
+	file.open("Database.dat", ios::in | ios::app | ios::binary); //Open file in read only mode.
 
 	cout << endl << "--------------------------------------------------------" << endl;
 	cout << "Database:" << endl;
 	cout << "--------------------------------------------------------" << endl << endl;
 
-	while (!EOF)
+	file.clear();
+	file.seekg(0L, ios::beg); //Go to beggining of file.
+
+	while (file) //While there is still something to read.
 	{
-		file.read(reinterpret_cast<char *>(&acc), sizeof(acc));
+		file.read(reinterpret_cast<char *>(&acc), sizeof(acc)); //Read the current structure in the file and place data into acc structure.
+
+		if (file.tellg() < 0) //If file pointer goes to -1
+		{
+			break; //Exit loop to prevent duplicate output.
+		}
 
 		cout << "--------------------------------------------------------" << endl;
 		cout << "Entry " << (counter + 1) << ": " << endl;
@@ -24,7 +32,10 @@ void DisplayFile()
 		cout << "Accunt Balance: " << acc.balance << endl;
 		cout << "Last Payment Date: " << acc.last_payment_date << endl;
 		cout << "--------------------------------------------------------" << endl << endl;
-
+		
 		counter++;
+
+		file.seekg(counter * sizeof(acc), ios::beg); //Go to file position (beggining + counter) and repeat.
 	}
+	file.close();
 }
