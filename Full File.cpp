@@ -1,8 +1,8 @@
 /***********************************************************************************
 Header:
 ************************************************************************************
-Author: Morgan Anderson, Eric Muenzer-Trumm
-Organization: Rogue Community College
+Author: Withheld
+Organization: Withheld
 File Name: Main.cpp
 Date Created: May 18, 2018
 Modifications: 05-22-18 12:00
