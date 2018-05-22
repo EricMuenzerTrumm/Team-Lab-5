@@ -1,1 +1,54 @@
+// deleteREc *
+// This function marks a record for deletion by placing *
 
+void deleteRec(long fp)
+{
+	Customer c;
+	int Rec = 0;
+	custFile.open("cust.dat", ios::in | ios::binary);
+	if (custFile.fail())
+	{
+		cout << "\nError opening file.\n";
+		return;
+	}
+
+	//Mark the file at offset fp for deletion
+	strcpy_s(c.name, "\0"); //Indicates deletion of record
+	custFile.seekp(fp, ios::beg);
+	custFile.write(reinterpret_cast<char*>(&c), sizeof(c));
+	custFile.clear();
+	custFile.close();
+
+	//Copy customer file to temporary file
+	custFile.open("cust.dat", ios::in | ios::binary);
+	tempFile.open("temp.dat", ios::out | ios::binary);
+	while (custFile.peek() != EOF)
+	{
+		custFile.read(reinterpret_cast<char*>(&c), sizeof(c));
+		tempFile.write(reinterpret_cast<char*>(&c), sizeof(c));
+	}
+	custFile.clear();
+	tempFile.clear();
+	custFile.close();
+	tempFile.close();
+
+	// Copy temporary file to customer file, skipping 
+	// the records that are marked for deletion
+	tempFile.open("temp.dat", ios::out | ios::binary);
+	custFile.open("cust.dat", ios::out | ios::binary);
+	while (true)
+	{
+		tempFile.read(reinterpret_cast<char*>(&c), sizeof(c));
+		if (tempFile.fail())
+			break;
+		if (c.name[0] != '\0')
+		{
+			custFile.write(reinterpret_cast<char*>(&c), sizeof(c));
+		}
+	}
+	tempFile.clear();
+	tempFile.close();
+	custFile.clear();
+	custFile.close();
+	cout << "\nDeletion Successful. \n";
+}
