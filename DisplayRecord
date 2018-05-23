@@ -1,1 +1,42 @@
+// ShowAll *
+// Show records in file *
 
+void showAll()
+{
+	cin.ignore();
+	Customer c;
+	int count = 0;
+	custFile.open("cust.dat", ios::in | ios::binary);
+	if (custFile.fail())
+	{
+		cout << "\nError opening file. \n";
+		return;
+	}
+	cout << "\n***Begin Customer Record***\n\n";
+
+	while (custFile.peek() != EOF)
+	{
+		custFile.read(reinterpret_cast<char*>(&c), sizeof(Customer));
+		cout << setprecision(2);
+		cout << fixed << showpoint;
+		cout << "\nRECORD NUMBER " << ++count << ":" << endl;
+		cout << "\nCustomer name: " << c.name << endl;
+		cout << "Customer Address: " << c.address << endl;
+		cout << "City: " << c.city << endl;
+		cout << "State: " << c.state << endl;
+		cout << "Zip: " << c.zip << endl;
+		cout << "Telephone: " << c.phone << endl;
+		cout << "Account Balance: " << c.balance << endl;
+		cout << "Date of Last Payment: " << c.lastPay << endl;
+		cout << endl;
+		cout << "\nPress Enter to Continue...";
+		cin.get();
+	}
+	if (count == 0)
+	{
+		cout << "\nFile is empty." << endl;
+	}
+	cout << "\n***End of Customer Record Listing***\n\n";
+	custFile.clear();
+	custFile.close();
+}
