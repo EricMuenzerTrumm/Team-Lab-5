@@ -1,1 +1,35 @@
+// search
+// Returns file pointer position
+// of a customer record
 
+long search()
+{
+	char name[45];
+	Customer c;
+	long fp;
+	cout << "\nEnter all or part of the Customer's Name: ";
+	cin.ignore();
+	cin.getline(name, 45);
+	if (name[0] == '\0') //if nothing is entered do nothing
+	{
+		return -1;
+	}
+
+	while (true)
+	{
+		custFile.read(reinterpret_cast<char*>(&c), sizeof(Customer)); //Read one record 
+		if (custFile.fail())
+			break;
+		if (strstr(c.name, name) != NULL) // If search value matches customers name..
+		{
+			fp = custFile.tellg();
+			custFile.clear();
+			custFile.close();
+			return (fp - sizeof(c));
+		}
+	}
+	cout << "Record not Found\n";
+	custFile.clear();
+	custFile.close();
+	return -1;
+}
